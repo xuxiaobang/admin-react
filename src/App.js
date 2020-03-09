@@ -1,11 +1,19 @@
 import React from 'react';
-import {} from 'antd'
+import {BrowserRouter as Router,Route,Switch} from 'react-router-dom'
+
+// 引入模块
+import Login from './pages/login/login'
+import Admin from './pages/admin/admin'
+
 
 function App() {
   return (
-    <div className="App">
-      app
-    </div>
+    <Router>
+        <Switch>
+            <Route path="/login" component={Login}/>
+            <Route path="/" component={Admin}/>
+        </Switch>
+    </Router>
   );
 }
 
