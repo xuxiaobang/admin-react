@@ -1,20 +1,64 @@
 import React, {Component} from 'react';
-import { Form, Input, Button } from 'antd';
+import { Form, Input, Button,message } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
+
 
 
 // 引入图片
 import Logo from '../../assets/images/logo.png'
 import './login.less'
 
+// 引入ajax请求
+import {reqLogin} from '../../api'
+
+// 引入util
+import memoryUtil from '../../utils/memoryUtil'
 
 class Login extends Component {
     //
-    handleSubmit = (values) => {
+    handleSubmit = async (values) => {
+
+        // 效验成功
         console.log(values)
+
+        // 获取到数据以后发送请求
+        let result = await reqLogin(values)
+        console.log(result)
+
+        // 如果请求的数据存在, 在考虑是否登录成功
+        if(result){
+            if(result.status == 0){
+                // 登录成功
+                message.success("登录成功")
+
+
+                // 登录成功以后,保存user数据
+                let user = result.data
+                memoryUtil.user = user;
+
+                // 跳转到Admin页
+                // console.log(this)
+                this.props.history.replace("/admin")
+
+
+            }else{
+                // 登录失败
+                message.error(result.msg)
+            }
+        }
+
     }
+
     handleFailed = ({errorFields}) => {
-        console.log(errorFields)
+
+        // 验证失败
+        // console.log(errorFields)
+        // 循环弹出所有验证提示
+        errorFields.forEach(({errors}) => {
+            errors.forEach(value => {
+                message.error(value)
+            })
+        })
     }
     /*
       自定义密码的验证
