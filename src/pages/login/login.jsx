@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { Form, Input, Button,message } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
-
+import {Redirect} from "react-router-dom";
 
 
 // 引入图片
@@ -13,6 +13,8 @@ import {reqLogin} from '../../api'
 
 // 引入util
 import memoryUtil from '../../utils/memoryUtil'
+import storageUtils from '../../utils/storageUtils'
+
 
 class Login extends Component {
     //
@@ -27,7 +29,7 @@ class Login extends Component {
 
         // 如果请求的数据存在, 在考虑是否登录成功
         if(result){
-            if(result.status == 0){
+            if(result.status === 0){
                 // 登录成功
                 message.success("登录成功")
 
@@ -36,10 +38,13 @@ class Login extends Component {
                 let user = result.data
                 memoryUtil.user = user;
 
+                // 使用内存存储有问题
+                // 使用本地存储来记录登录信息
+                storageUtils.addUser(user)
+
                 // 跳转到Admin页
                 // console.log(this)
                 this.props.history.replace("/admin")
-
 
             }else{
                 // 登录失败
@@ -92,6 +97,14 @@ class Login extends Component {
     })
 
     render() {
+        // 判断是否登录, 登录就跳转到admin页面
+        const user = memoryUtil.user;
+        if(user && user._id){
+            // 如果内存中是没数据的, 是没登录状态,那就跳转到登录页面
+            return <Redirect to="/" />
+        }
+
+
         return (
             <div className='login'>
                 {/* header */}
