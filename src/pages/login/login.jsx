@@ -44,7 +44,7 @@ class Login extends Component {
 
                 // 跳转到Admin页
                 // console.log(this)
-                this.props.history.replace("/admin")
+                this.props.history.replace("/")
 
             }else{
                 // 登录失败
