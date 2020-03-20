@@ -48,7 +48,9 @@ import {message} from 'antd';
 // 第二种方法
 // 请求拦截函数
 axios.interceptors.response.use((response)=>{
+
     return Promise.resolve(response.data)
+
 },error=>{
     // 同意处理错误
     message.error("请求错误"+error)

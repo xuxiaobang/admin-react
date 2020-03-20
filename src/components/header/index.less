@@ -1,3 +1,43 @@
 .header{
   height:80px;
+  background: #fff;
+  .logout{
+    display:flex;
+    justify-content: flex-end;
+    align-items:center;
+    padding-right: 30px;
+    height: 40px;
+    border-bottom:2px solid #1890ff;
+    span{
+      margin-right:10px;
+    }
+  }
+  .header-bottom{
+    position: relative;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    padding:0 30px;
+    height:38px;
+    &:after{
+      content:'';
+      position: absolute;
+      left:30px;
+      top:100%;
+      display: block;
+      width: 0;
+      height: 0;
+      border:20px solid transparent;
+      border-bottom:none;
+      border-top-color: #fff;
+
+    }
+    .header-bottom-left{
+      font-size:20px;
+    }
+    span{
+      margin-left:20px;
+    }
+  }
+
 }

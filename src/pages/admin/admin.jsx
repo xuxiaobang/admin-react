@@ -30,7 +30,7 @@ class Admin extends Component {
     render() {
         // 从内存中取出user,查看user数据来判断是否登录
         const user = memoryUtils.user;
-        console.log(user)
+        // console.log(user)
         if(!(user && user._id)){
             // 如果内存中是没数据的, 是没登录状态,那就跳转到登录页面
             return <Redirect to="/login" />
@@ -49,9 +49,9 @@ class Admin extends Component {
                           <Route path="/product" component={Product}/>
                           <Route path="/user" component={User}/>
                           <Route path="/role" component={Role}/>
-                          <Route path="/chats/bar" component={Bar}/>
-                          <Route path="/chats/line" component={Line}/>
-                          <Route path="/chats/pie" component={Pie}/>
+                          <Route path="/charts/bar" component={Bar}/>
+                          <Route path="/charts/line" component={Line}/>
+                          <Route path="/charts/pie" component={Pie}/>
                           <Redirect to="/home"/>
                       </Switch>
                     </Content>

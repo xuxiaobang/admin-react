@@ -21,11 +21,11 @@ class Login extends Component {
     handleSubmit = async (values) => {
 
         // 效验成功
-        console.log(values)
+        // console.log(values)
 
         // 获取到数据以后发送请求
         let result = await reqLogin(values)
-        console.log(result)
+        // console.log(result)
 
         // 如果请求的数据存在, 在考虑是否登录成功
         if(result){
